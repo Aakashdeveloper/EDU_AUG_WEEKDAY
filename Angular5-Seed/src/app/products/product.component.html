@@ -16,7 +16,8 @@
             <div class="col-md-6">
                 <h3>Filtered By: {{filterText}}</h3>
             </div>
-        </div>  
+        </div> 
+        <br/>
         {{showImage}}                               
         <div class="table-responsive" *ngIf="products && products.length">
             <table class="table">
@@ -36,15 +37,18 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr *ngFor="let prod of products">
+                    <tr *ngFor="let prod of products | filterData:filterText">
                         <td>
                             <img [src]='prod.imageUrl'
+                                [style.width.px]="imageWidth"
                                 *ngIf="showImage"/>
                         </td>
-                        <td>{{prod.productName | myUpper:"lower"}}</td>
+                        <td style="font-style: italic">{{prod.productName | myUpper:"lower"}}</td>
                         <td>{{prod.productCode | myUpper:"lower"}}</td>
                         <td>{{prod.releaseDate}}</td>
-                        <td>{{prod.price | AddValue | currency:"EUR"}}</td>
+                        <td [ngStyle]="{'background-color':prod.price>30?'darkgray':'salmon'}">
+                            {{prod.price | AddValue | currency:"EUR"}}
+                        </td>
                         <td>{{prod.starRating}}</td>
                     </tr>
                 </tbody>
