@@ -9,6 +9,8 @@ import { ProductComponent } from './products/product.component';
 import { MyUpperPipe } from './products/prodUpper.pipe';
 import { AddValuePipe } from './products/addValue.pipe';
 import { FilterPipe } from './products/filterText.pipe';
+import { StarComponent } from './shared/star.component';
+import { ProductService } from './products/product.service';
 
 @NgModule({
     // All modules will declare here
@@ -25,7 +27,8 @@ import { FilterPipe } from './products/filterText.pipe';
         ProductComponent,
         MyUpperPipe,
         AddValuePipe,
-        FilterPipe
+        FilterPipe,
+        StarComponent
     ],
 
     // Main Component only in main module
@@ -34,7 +37,9 @@ import { FilterPipe } from './products/filterText.pipe';
     ],
 
     // All Service declare here
-    providers: []
+    providers: [
+        ProductService
+    ]
 })
 
 export class AppModule {

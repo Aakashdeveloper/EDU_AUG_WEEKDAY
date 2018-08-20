@@ -31,9 +31,9 @@
                         </th>
                         <th> Name </th>
                         <th> Code </th>
-                        <th> Star Rating</th>
-                        <th> Date </th>
+                        <th> Date</th>
                         <th> Price </th>
+                        <th> Star Rating </th>
                     </tr>
                 </thead>
                 <tbody>
@@ -49,7 +49,10 @@
                         <td [ngStyle]="{'background-color':prod.price>30?'darkgray':'salmon'}">
                             {{prod.price | AddValue | currency:"EUR"}}
                         </td>
-                        <td>{{prod.starRating}}</td>
+                        <td>
+                            <app-star [rating]="prod.starRating"
+                                (ratingClicked) = 'onDataRecive($event)'></app-star>
+                        </td>
                     </tr>
                 </tbody>
             </table>
