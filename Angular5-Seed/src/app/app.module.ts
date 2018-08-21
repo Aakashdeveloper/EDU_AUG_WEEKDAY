@@ -1,6 +1,8 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
+import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
@@ -16,7 +18,9 @@ import { ProductService } from './products/product.service';
     // All modules will declare here
     imports: [
         BrowserModule,
-        FormsModule
+        FormsModule,
+        HttpModule,
+        HttpClientModule
     ],
 
     // All Component & Pipe & router will declare here

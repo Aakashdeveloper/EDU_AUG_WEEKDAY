@@ -1,45 +1,63 @@
-import { Injectable } from '@angular/core';
+import { Injectable } from '@angular/core';         // For all method
+import { IProduct } from './product.model';         // For all method
+import { Http, Response } from '@angular/http';     // For all method
+import { HttpClient } from '@angular/common/http';  // If using HttpClient
+import { Observable } from 'rxjs/Observable';       // SKIP only if using promisse
+import 'rxjs/add/operator/map';                     // For Angular 5
+import { map } from 'rxjs/operators';               // Angular 6
 
 @Injectable()
 
 export class ProductService {
 
-    getProducts(): any[] {
-            return [
-                {
-                    '_id': '5a05dacc734d1d68d42d31f3',
-                    'productId': 1,
-                    'productName': 'Leaf Rake',
-                    'productCode': 'GDN-0011',
-                    'releaseDate': 'March 19, 2016',
-                    'description': 'Leaf rake with 48-inch wooden handle.',
-                    'price': 19.95,
-                    'starRating': 3.5,
-                    'imageUrl': 'http://openclipart.org/image/300px/svg_to_png/26215/Anonymous_Leaf_Rake.png'
-                },
-                {
-                    '_id': '5a05daec734d1d68d42d32ca',
-                    'productId': 2,
-                    'productName': 'Garden Cart',
-                    'productCode': 'GDN-0023',
-                    'releaseDate': 'March 18, 2016',
-                    'description': '15 gallon capacity rolling garden cart',
-                    'price': 32.99,
-                    'starRating': 4.2,
-                    'imageUrl': 'http://openclipart.org/image/300px/svg_to_png/58471/garden_cart.png'
-                },
-                {
-                    '_id': '5a05db08734d1d68d42d3300',
-                    'productId': 5,
-                    'productName': 'Hammer',
-                    'productCode': 'TBX-0048',
-                    'releaseDate': 'May 21, 2016',
-                    'description': 'Curved claw steel hammer',
-                    'price': 8.9,
-                    'starRating': 4.8,
-                    'imageUrl': 'http://openclipart.org/image/300px/svg_to_png/73/rejon_Hammer.png'
-                }
-            ];
+    private _productUrl = 'https://ngproductsparam.herokuapp.com/api/getProductDetails';
+
+    constructor(private _http: Http,
+                private _httpClient: HttpClient) {}
+
+    private extractData(res: Response) {
+        return res.json();
     }
+    // Using HTTP Client
+        getProducts(): Observable<IProduct[]> {
+            return this._httpClient.get<IProduct[]>(this._productUrl);
+        }
+
+
+    // Angular 5 Observable HTTP
+
+    /*
+    getProducts(): Observable<IProduct[]> {
+        return this._http.get(this._productUrl)
+                   .map((data: Response) => data.json());  // deseralize data
+    }
+    */
+
+    // Angular 6
+    /*    getProducts(): Observable<IProduct[]> {
+            return this._http.get(this._productUrl)
+                .pipe(map(this.extractData));
+        }
+    */
+
+    // Promise
+    /*getProducts(): Promise<IProduct[]> {
+            return this._http.get(this._productUrl)
+                        .toPromise()
+                        .then((data: Response) => data.json());
+    }*/
+
 
 }
+
+
+
+
+/*
+observable
+function add(a,b){
+    return a+b
+}
+
+var add = (a,b) => {return a+b}
+*/

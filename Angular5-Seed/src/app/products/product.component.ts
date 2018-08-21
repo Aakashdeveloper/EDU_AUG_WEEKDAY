@@ -1,4 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { IProduct } from './product.model';
+import { ProductService } from './product.service';
+
 
 @Component({
     selector: 'app-product',
@@ -7,21 +10,36 @@ import { Component } from '@angular/core';
     styleUrls: ['./product.component.css']
 })
 
-export class ProductComponent {
+export class ProductComponent implements OnInit {
     title: String = '@@@@Product list@@@';
     showTable: Boolean = true;
     showImage: Boolean = false;
     filterText: String;
     imageWidth: Number = 180;
-    products: any[];
+    products: IProduct[];
 
-  toggleImage(): void {
-    this.showImage = !this.showImage;
-  }
+    constructor(private _productService: ProductService) {}
 
-  onDataRecive(message: string) {
-      this.title = '@@@@Product list@@@ >>>> ' + message;
-  }
+    toggleImage(): void {
+      this.showImage = !this.showImage;
+    }
+
+    // Observable
+
+      ngOnInit(): void {
+        this._productService.getProducts()
+            .subscribe((data) => this.products = data);
+      }
+
+    // Promise
+    /*ngOnInit(): void {
+      this._productService.getProducts()
+          .then((data) => this.products = data);
+    }*/
+
+    onDataRecive(message: string) {
+        this.title = '@@@@Product list@@@ >>>> ' + message;
+    }
 }
 
 
