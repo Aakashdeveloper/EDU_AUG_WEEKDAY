@@ -3,6 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
+import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
 import { DashboardComponent } from './dashboard.component';
@@ -13,6 +14,10 @@ import { AddValuePipe } from './products/addValue.pipe';
 import { FilterPipe } from './products/filterText.pipe';
 import { StarComponent } from './shared/star.component';
 import { ProductService } from './products/product.service';
+import { OrderComponent } from './orders/order.component';
+import { ProductDetailComponent } from './products/product-detail.component';
+import { HomeComponent } from './home/home.component';
+import { NotFoundComponent } from './shared/notfound.component';
 
 @NgModule({
     // All modules will declare here
@@ -20,7 +25,15 @@ import { ProductService } from './products/product.service';
         BrowserModule,
         FormsModule,
         HttpModule,
-        HttpClientModule
+        HttpClientModule,
+        RouterModule.forRoot([
+            {path: 'product', component: ProductComponent},
+            {path: 'product/:id', component: ProductDetailComponent},
+            {path: 'order', component: OrderComponent},
+            {path: 'home', component: HomeComponent},
+            {path: '', redirectTo: 'home', pathMatch: 'full'},
+            {path: '**', component: NotFoundComponent}
+        ])
     ],
 
     // All Component & Pipe & router will declare here
@@ -32,7 +45,11 @@ import { ProductService } from './products/product.service';
         MyUpperPipe,
         AddValuePipe,
         FilterPipe,
-        StarComponent
+        StarComponent,
+        OrderComponent,
+        ProductDetailComponent,
+        HomeComponent,
+        NotFoundComponent
     ],
 
     // Main Component only in main module
