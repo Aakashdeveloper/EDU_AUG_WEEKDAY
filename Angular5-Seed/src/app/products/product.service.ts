@@ -23,6 +23,11 @@ export class ProductService {
             return this._httpClient.get<IProduct[]>(this._productUrl);
         }
 
+        getProductDetails(id): Observable<IProduct[]> {
+            return this._http.get('https://ngproductsparam.herokuapp.com/api/getProductDetails?productId=' + id)
+                        .map((data: Response) => data.json());
+        }
+
 
     // Angular 5 Observable HTTP
 

@@ -72,6 +72,7 @@
                                 </div>
                                 <div class="modal-body">
                                 <p>{{prod.description}}</p>
+                                <img [src]="prod.imageUrl"/>
                                 </div>
                                 <div class="modal-footer">
                                 <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -86,3 +87,6 @@
         </div>
     </div>
 </div>
+
+
+<!--[queryParams]="{name:prod.productName, desc:prod.description, img:prod.imageUrl}">-->

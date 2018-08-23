@@ -4,5 +4,11 @@
     </div>
     <div class="panel-body">
         This is Detail Page for >>> {{id}}
+        <h1>{{detail[0].productName}}</h1>
+        <img [src]="detail[0].imageUrl"/>
+        <h2>{{detail[0].description}}</h2>
+        <button type="button" class="btn btn-danger" (click)="onBack()">
+            <<Back
+        </button>
     </div>
 </div>

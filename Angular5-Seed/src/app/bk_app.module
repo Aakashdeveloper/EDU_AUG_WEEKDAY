@@ -6,10 +6,18 @@ import { HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 
 import { AppComponent } from './app.component';
+import { DashboardComponent } from './dashboard.component';
+import { DashComponent } from './dash.component';
+import { ProductComponent } from './products/product.component';
+import { MyUpperPipe } from './products/prodUpper.pipe';
+import { AddValuePipe } from './products/addValue.pipe';
+import { FilterPipe } from './products/filterText.pipe';
+import { StarComponent } from './shared/star.component';
+import { ProductService } from './products/product.service';
 import { OrderComponent } from './orders/order.component';
+import { ProductDetailComponent } from './products/product-detail.component';
 import { HomeComponent } from './home/home.component';
 import { NotFoundComponent } from './shared/notfound.component';
-import { ProductModule } from './products/product.module';
 
 @NgModule({
     // All modules will declare here
@@ -19,18 +27,27 @@ import { ProductModule } from './products/product.module';
         HttpModule,
         HttpClientModule,
         RouterModule.forRoot([
+            {path: 'product', component: ProductComponent},
+            {path: 'product/:id', component: ProductDetailComponent},
             {path: 'order', component: OrderComponent},
             {path: 'home', component: HomeComponent},
             {path: '', redirectTo: 'home', pathMatch: 'full'},
             {path: '**', component: NotFoundComponent}
-        ]),
-        ProductModule
+        ])
     ],
 
     // All Component & Pipe & router will declare here
     declarations: [
         AppComponent,
+        DashboardComponent,
+        DashComponent,
+        ProductComponent,
+        MyUpperPipe,
+        AddValuePipe,
+        FilterPipe,
+        StarComponent,
         OrderComponent,
+        ProductDetailComponent,
         HomeComponent,
         NotFoundComponent
     ],
@@ -41,7 +58,9 @@ import { ProductModule } from './products/product.module';
     ],
 
     // All Service declare here
-    providers: []
+    providers: [
+        ProductService
+    ]
 })
 
 export class AppModule {
