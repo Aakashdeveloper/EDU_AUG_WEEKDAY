@@ -1,0 +1,117 @@
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        Employee Forms
+    </div>
+    <div class="panel-body">
+       <form #form="ngForm" novalidate (submit)="submitForm(form)">
+           <div class="row">
+               <div class="col-md-6">
+                    <div class="form-group" [class.has-error]="firstname.invalid">
+                    <label for="firstName"
+                            class="control-label">FirstName</label>
+                        <input type="text" 
+                            placeholder="firstName"
+                            name="firstName"
+                            id="firstName"
+                            required
+                            class="form-control"
+                            [ngModel]="model.firstName"
+                            (ngModelChange)="firstToUpper($event)"
+                            #firstname="ngModel"
+                        >
+                        <div class="alert alert-danger" *ngIf="firstname.invalid">
+                            FirstName is required
+                        </div>
+                    </div>
+                    <h3>Classes</h3>
+                    <!--h3>{{firstname.className}}</h3-->
+                    <h3>{{firstname.invalid}}</h3>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-6">
+                            <label for="lastName"
+                                class="control-label">LastName</label>
+                            <input type="text" 
+                                    placeholder="lastName"
+                                    name="lastName"
+                                    id="lastName"
+                                    class="form-control"
+                                    [(ngModel)]="model.lastName"
+                            >
+                    </div>
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="email.invalid && email.touched">
+                <label for="email"
+                        class="control-label">Email</label>
+                <input type="text" 
+                        placeholder="email"
+                        name="email"
+                        id="email"
+                        class="form-control"
+                        [(ngModel)]="model.email"
+                        pattern="^([a-zA-Z0-9]+)@([a-zA-Z0-9]+)\.([a-zA-Z]{2,5})$"
+                        #email="ngModel">
+                <div class="alert alert-danger" *ngIf="email.invalid && email.touched">
+                    Please enter valid pattern
+                </div>
+            </div>
+            <div class="form-group" [class.has-error]="password.invalid && password.touched">
+                    <label for="password"
+                           class="control-label">Password</label>
+                    <input type="password" 
+                           placeholder="password"
+                           name="password"
+                            id="password"
+                            class="form-control"
+                            minlength="5"
+                            [(ngModel)]="model.password"
+                            #password="ngModel">
+                    <div class="alert alert-danger" *ngIf="password.invalid && password.touched">
+                        Min length must be 5
+                    </div>
+            </div>
+            <div class="radio">
+                <label>
+                    <input type="radio"
+                            name="gender"
+                            value="female"
+                            [(ngModel)]="model.gender">
+                        Female
+                </label>
+            </div>
+            <div class="radio">
+                    <label>
+                        <input type="radio"
+                                name="gender"
+                                value="male"
+                                [(ngModel)]="model.gender">
+                            Male
+                    </label>
+            </div>
+            <div class="checkbox">
+                <label>
+                    <input type="checkbox"
+                            name="fullTime"
+                            [(ngModel)]="model.fullTime">
+                            fullTime
+                </label>
+            </div>
+            <div class="form-group">
+                <label for="codelang">CodeLang</label>
+                <select class="form-control"
+                        name="codelang"
+                        id="codelang"
+                        [(ngModel)]="model.codelang">
+                    <option *ngFor="let lang of languages">
+                        {{lang}}
+                    </option>
+                </select>
+            </div>
+            <button type="submit"
+                    class="btn btn-success">
+                    Submit
+            </button>
+       </form>
+    </div>
+</div>
