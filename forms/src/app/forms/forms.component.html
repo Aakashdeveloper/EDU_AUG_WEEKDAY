@@ -84,7 +84,7 @@
                     <label>
                         <input type="radio"
                                 name="gender"
-                                value="male"
+                                value="Male"
                                 [(ngModel)]="model.gender">
                             Male
                     </label>
@@ -97,19 +97,27 @@
                             fullTime
                 </label>
             </div>
-            <div class="form-group">
-                <label for="codelang">CodeLang</label>
+            <div class="form-group" [class.has-error]="hasCodelangError">
+                <label class="control-label" for="codelang">CodeLang</label>
                 <select class="form-control"
                         name="codelang"
                         id="codelang"
+                        (blur)="validateCodeLang($event)"
                         [(ngModel)]="model.codelang">
+                    <option value="default">
+                        Please Select Lang
+                    </option>
                     <option *ngFor="let lang of languages">
                         {{lang}}
                     </option>
                 </select>
+                <div class="alert alert-danger" *ngIf="hasCodelangError">
+                    Please select valid input
+                </div>
             </div>
             <button type="submit"
-                    class="btn btn-success">
+                    class="btn btn-success"
+                    [disabled]="disableSubmit">
                     Submit
             </button>
        </form>
